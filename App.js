@@ -89,13 +89,13 @@ export class ContentView extends Component {
   renderDiscalimer() {
     return (
         <View style={styles.container}>
-          <Text style={styles.welcome}>Mebitek Modular System</Text>
-          <Text>Manual References</Text>
+          <Text style={styles.text}>Mebitek Modular System</Text>
+          <Text style={styles.text}>Manual References</Text>
           <Image style={{flex: 1, height: undefined, width: undefined}}
                  source={require('./img/modulargrid_833923.png')}
                  resizeMode="contain"
           />
-          <Text style={styles.instructions}>
+          <Text style={styles.text}>
             <Icon name={"md-arrow-back"}/>Select a manual from the sidebar menu
           </Text>
         </View>
@@ -137,12 +137,16 @@ Menu.propTypes = {
   onItemSelected: PropTypes.func.isRequired,
 };
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#000',
+  },
+  text: {
+    color: '#FFF'
   },
   menu: {
     flex: 1,
