@@ -34,7 +34,7 @@ where:
 
 released under **GNU GENERAL PUBLIC LICENSE v3** www.mebitek.com
 
-![Actual Setup](https://www.modulargrid.net/e/racks/view/833923)
+![Actual Setup](https://cdn.modulargrid.net/img/racks/modulargrid_833923.jpg)
 
 ### module list
 * Make Noise Erbe-Verb Illustrated (thx to http://www.vo1t.com)
