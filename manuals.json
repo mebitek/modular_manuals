@@ -1,0 +1,177 @@
+[
+  {
+    "key": "Make Noise Shared System",
+    "url": "http://www.makenoisemusic.com/content/manuals/bg-sharedsystemmanual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Make Noise Brains",
+    "url": "http://www.makenoisemusic.com/content/manuals/brainsmanual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Make Noise Pressure Points",
+    "url": "http://www.makenoisemusic.com/content/manuals/PressurePointsManual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Make Noise DPO",
+    "url": "http://www.makenoisemusic.com/content/manuals/dpo-manual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Make Noise Echophon",
+    "url": "http://www.makenoisemusic.com/content/manuals/EchophonManual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Make Noise Erbe-Verb",
+    "url": "http://www.makenoisemusic.com/content/manuals/Erbe-VerbManual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Make Noise Erbe-Verb Illustrated",
+    "url": "http://www.vo1t.com/Euro/ErbeVerbIllustrated.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Make Noise Function",
+    "url": "http://www.makenoisemusic.com/content/manuals/FUNCTIONmanual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Make Noise Function Supplement",
+    "url": "//custom/Makenoise-Function-supplementV1.pdf",
+    "type": "int"
+  },
+  {
+    "key": "Make Noise Maths",
+    "url": "http://www.makenoisemusic.com/content/manuals/MATHSmanual2013.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Make Noise Maths Illustrated",
+    "url": "//custom/maths2013-V1.11-printable.pdf",
+    "type": "int"
+  },
+  {
+    "key": "Make Noise LxD",
+    "url": "http://www.makenoisemusic.com/content/manuals/LxDManual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Make Noise modDemix",
+    "url": "http://www.makenoisemusic.com/content/manuals/modDemixMANUAL.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Make Noise Morphagene",
+    "url": "http://www.makenoisemusic.com/content/manuals/morphagene-manual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Make Noise Morphagene Button Combo",
+    "url": "//custom/MorphageneButtonCombos.pdf",
+    "type": "int"
+  },
+  {
+    "key": "Make Noise Optomix",
+    "url": "http://www.makenoisemusic.com/content/manuals/optomixrev2manual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Make Noise QPAS",
+    "url": "http://www.makenoisemusic.com/content/manuals/qpas-manual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Make Noise René;",
+    "url": "http://www.makenoisemusic.com/content/manuals/reneclassicmanual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Make Noise Rosie",
+    "url": "http://www.makenoisemusic.com/content/manuals/RosieManual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Make Noise STO",
+    "url": "http://www.makenoisemusic.com/content/manuals/STOManual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Make Noise Telharmonic",
+    "url": "http://www.makenoisemusic.com/content/manuals/telharmonicManual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Make Noise Tempi",
+    "url": "http://www.makenoisemusic.com/content/manuals/tempimanual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Make Noise Tempi Cheaat Sheet",
+    "url": "//custom/TEMPI_Cheat_Sheet.pdf",
+    "type": "int"
+  },
+  {
+    "key": "Make Noise Wogglebug",
+    "url": "http://www.makenoisemusic.com/content/manuals/wogglebugmanual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Expert Sleepers Disting MK4",
+    "url": "http://www.expert-sleepers.co.uk/downloads/manuals/disting_user_manual_4.10.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Expert Sleepers Disting MK4 Illustrated",
+    "url": "http://www.vo1t.com/Euro/Illustrated/ESdistingMk4V4.10.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "WMD Mini Slew",
+    "url": "https://cdn.shopify.com/s/files/1/0977/3366/files/MINISLEWmanual1.1.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "2HP MIX",
+    "url": "http://www.twohp.com/s/Mix_Manual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "2HP VCA",
+    "url": "http://www.twohp.com/s/VCA_Manual-1.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "uO_C",
+    "url": "//custom/o_c_user_manual_for_v1.3.pdf",
+    "type": "int"
+  },
+  {
+    "key": "Erica Synths Pico SEQS",
+    "url": "https://www.ericasynths.lv/media/Pico_SEQS_User_Manual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Erica Synths Pico DSP",
+    "url": "https://www.ericasynths.lv/media/Pico_DSP_Manual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Moog Mother32",
+    "url": "https://api.moogmusic.com/sites/default/files/2018-01/Mother_32_Manual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Moog Mother32 Quickstart",
+    "url": "https://api.moogmusic.com/sites/default/files/2017-11/Mother%2032%20Quickstart.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Moog Mother32 PatchBook",
+    "url": "https://back.moogmusic.com/sites/default/files/2019-02/Electronicus%20Patch%20Book_0.pdf",
+    "type": "ext"
+  }
+]
