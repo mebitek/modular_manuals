@@ -34,4 +34,43 @@ where:
 
 released under **GNU GENERAL PUBLIC LICENSE v3** www.mebitek.com
 
-![Actual Setup](https://cdn.modulargrid.net/img/racks/modulargrid_835929.jpg)
+![Actual Setup](https://www.modulargrid.net/e/racks/view/833923)
+
+### module list
+* Make Noise Erbe-Verb Illustrated (thx to http://www.vo1t.com)
+* Make Noise Echophon
+* WMD Mini Slew
+* Make Noise Morphagene Button Combo (thx to fourhexagons - muffwiggler forum)
+* Make Noise Erbe-Verb
+* Make Noise QPAS
+* Expert Sleepers Disting MK4
+* Make Noise Brains
+* Make Noise STO
+* Make Noise Optomix
+* Make Noise Function Supplement (thx to demonamination - muffwiggler forum)
+* 2HP MIX
+* Make Noise Tempi
+* Make Noise Maths Illustrated  (thx to demonamination - muffwiggler forum)
+* Moog Mother32
+* Erica Synths Pico DSP
+* Moog Mother32 PatchBook
+* Make Noise Tempi Cheaat Sheet (thx to muffwiggler forum)
+* 2HP VCA
+* Make Noise Pressure Points
+* Expert Sleepers Disting MK4 Illustrated (thx Bob Borries - muffwiggler forum)
+* Make Noise Morphagene
+* Moog Mother32 Quickstart
+* uO_C
+* Make Noise Function
+* Make Noise Maths
+* Make Noise Wogglebug
+* Make Noise modDemix
+* Make Noise René
+* Make Noise LxD
+* Make Noise DPO
+* Make Noise Rosie
+* Make Noise Shared System
+* Make Noise Telharmonic
+* Erica Synths Pico SEQS
+
+### I do not own any manual rights
