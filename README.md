@@ -40,24 +40,24 @@ released under **GNU GENERAL PUBLIC LICENSE v3** www.mebitek.com
 * Make Noise Erbe-Verb Illustrated (thx to http://www.vo1t.com)
 * Make Noise Echophon
 * WMD Mini Slew
-* Make Noise Morphagene Button Combo (thx to fourhexagons - muffwiggler forum)
+* Make Noise Morphagene Button Combo (thx to fourhexagons - https://www.muffwiggler.com/forum/)
 * Make Noise Erbe-Verb
 * Make Noise QPAS
 * Expert Sleepers Disting MK4
 * Make Noise Brains
 * Make Noise STO
 * Make Noise Optomix
-* Make Noise Function Supplement (thx to demonamination - muffwiggler forum)
+* Make Noise Function Supplement (thx to demonamination - https://www.muffwiggler.com/forum/)
 * 2HP MIX
 * Make Noise Tempi
-* Make Noise Maths Illustrated  (thx to demonamination - muffwiggler forum)
+* Make Noise Maths Illustrated  (thx to demonamination - https://www.muffwiggler.com/forum/)
 * Moog Mother32
 * Erica Synths Pico DSP
 * Moog Mother32 PatchBook
 * Make Noise Tempi Cheaat Sheet (thx to muffwiggler forum)
 * 2HP VCA
 * Make Noise Pressure Points
-* Expert Sleepers Disting MK4 Illustrated (thx Bob Borries - muffwiggler forum)
+* Expert Sleepers Disting MK4 Illustrated (thx Bob Borries - https://www.muffwiggler.com/forum/)
 * Make Noise Morphagene
 * Moog Mother32 Quickstart
 * uO_C
