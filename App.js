@@ -88,11 +88,15 @@ export class ContentView extends Component {
   }
 
   renderDiscalimer() {
+
+    let width = Dimensions.get("window").width - 20;
+    let height = Dimensions.get("window").height - 20;
+
     return (
         <View style={styles.container}>
           <Text style={styles.text}>Mebitek Modular System</Text>
           <Text style={styles.text}>Manual References</Text>
-          <Image style={{flex: 1, height: undefined, width: undefined}}
+          <Image style={{flex: 1, width: width, height: height} }
                  source={require('./img/modulargrid_833923.png')}
                  resizeMode="contain"
           />
@@ -105,7 +109,7 @@ export class ContentView extends Component {
 
   static renderPdf(item) {
 
-    let source = {uri: item.url};
+    let source = {uri: item.url, cache: true};
     if (item.type === 'int') {
       source = {uri: "bundle-assets:"+item.url}
     }
@@ -126,12 +130,13 @@ export class Menu extends Component{
   constructor(props) {
     super(props);
 
+    this.arrayholder = shuffle(props.datasource);
+
     this.state = {
       text: "",
-      datasource: props.datasource
+      datasource: this.arrayholder
     };
 
-    this.arrayholder = props.datasource;
   }
 
   searchFilterFunction = (text: string) => {
@@ -150,6 +155,7 @@ export class Menu extends Component{
   render() {
     return (
         <View style={styles.menu}>
+          <Text style={styles.text}>MANUALS</Text>
           <TextInput
               style={styles.textInputStyle}
               onChangeText={text => this.searchFilterFunction(text)}
@@ -171,6 +177,25 @@ export class Menu extends Component{
         </ScrollView>
         </View>)
   }
+}
+
+function shuffle(array) {
+  let currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
 }
 
 Menu.propTypes = {
