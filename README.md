@@ -31,3 +31,8 @@ where:
 * manuals location can be internal (assets) or external (internet)
 * manuals are cached with no expiration
 * opensource
+
+released under **GNU GENERAL PUBLIC LICENSE v3** www.mebitek.com
+
+![Actual Setup](https://cdn.modulargrid.net/img/racks/modulargrid_835929.jpg)
+![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
