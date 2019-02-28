@@ -32,6 +32,15 @@ where:
 * manuals are cached with no expiration
 * opensource
 
+## prerequisites
+* npm
+* react-native
+
+## installation
+* clone or download the repository
+* run npm install
+* run react-native run-android
+
 released under **GNU GENERAL PUBLIC LICENSE v3** www.mebitek.com
 
 ![Actual Setup](https://cdn.modulargrid.net/img/racks/modulargrid_833923.jpg)
@@ -54,10 +63,10 @@ released under **GNU GENERAL PUBLIC LICENSE v3** www.mebitek.com
 * Moog Mother32
 * Erica Synths Pico DSP
 * Moog Mother32 PatchBook
-* Make Noise Tempi Cheaat Sheet (thx to muffwiggler forum)
+* Make Noise Tempi Cheat Sheet (thx to  https://www.muffwiggler.com/forum)
 * 2HP VCA
 * Make Noise Pressure Points
-* Expert Sleepers Disting MK4 Illustrated (thx Bob Borries - https://www.muffwiggler.com/forum/)
+* Expert Sleepers Disting MK4 Illustrated (thx http://www.vo1t.com)
 * Make Noise Morphagene
 * Moog Mother32 Quickstart
 * uO_C
@@ -74,3 +83,10 @@ released under **GNU GENERAL PUBLIC LICENSE v3** www.mebitek.com
 * Erica Synths Pico SEQS
 
 ### I do not own any manual rights
+### all rights are owned by the modules manifacture
+### http://makenoisemusic.com/
+### http://www.expert-sleepers.co.uk/
+### http://www.twohp.com/
+### https://www.ericasynths.lv/
+### https://ornament-and-cri.me/
+### https://www.moogmusic.com/
