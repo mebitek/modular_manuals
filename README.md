@@ -35,4 +35,3 @@ where:
 released under **GNU GENERAL PUBLIC LICENSE v3** www.mebitek.com
 
 ![Actual Setup](https://cdn.modulargrid.net/img/racks/modulargrid_835929.jpg)
-![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
