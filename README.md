@@ -1,4 +1,4 @@
-# modular_manuals
+# Modular Manuals
 
 An Android app that helps to consult Modular System Manuals
 
