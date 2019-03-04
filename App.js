@@ -24,6 +24,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import Pdf from 'react-native-pdf';
 import PropTypes from 'prop-types';
 import { AsyncStorage } from "react-native";
+import { CheckBox } from 'react-native-elements'
 
 
 export default class App extends Component {
@@ -102,7 +103,8 @@ export class ContentView extends Component {
 
     this.state = {
 
-      pdfPath: ''
+      pdfPath: '',
+      enablePdfPath: false
     };
 
     this.retrieveData();
@@ -130,9 +132,17 @@ export class ContentView extends Component {
 
     return (
         <View style={styles.container}>
-          <Text style={styles.text}>Pdf File Path</Text>
-           <TextInput style={styles.textInputStyle} value={this.state.pdfPath} onChangeText={text => this.onChangePrefs(text)}/>
-          <Text style={styles.text} onPress={this.storeData}>OK</Text>
+          <CheckBox style={styles.text} title={"Enable Load from FS"} checked={this.state.enablePdfPath}  onPress={() => this.setState({ enablePdfPath: !this.state.enablePdfPath }) }/>
+
+          { this.state.enablePdfPath &&
+            <View>
+              <Text style={styles.text}>Pdf File Path</Text>
+              <TextInput style={styles.textInputStyle}
+                         value={this.state.pdfPath}
+                         onChangeText={text => this.onChangePrefs(text)}/>
+            </View>
+          }
+           <Text style={styles.text} onPress={this.storeData}>OK</Text>
         </View>
     )
 
@@ -144,31 +154,40 @@ export class ContentView extends Component {
   };
 
   storeData = () => {
-
     try {
-      AsyncStorage.setItem('pdfPath', this.state.pdfPath).then(() => {
+      AsyncStorage.setItem("pdfPath", this.state.pdfPath).then(() => {
         this.setState({
           pdfPath: this.state.pdfPath
         });
-        this.props.onSavePrefs()
-      })
+      });
+      AsyncStorage.setItem("enablePdfPath", JSON.stringify(this.state.enablePdfPath)).then(() => {
+        this.setState({
+          pdfPath: this.state.enablePdfPath
+        });
+      });
+      this.props.onSavePrefs()
+
     } catch (error) {
       alert(error)
     }
-
-
   };
+
 
    retrieveData = async () => {
     try {
-      await AsyncStorage.getItem('pdfPath').then(asyncStorageRes => {
 
+      await AsyncStorage.getItem('enablePdfPath').then(asyncStorageRes => {
+        this.setState({
+          enablePdfPath: JSON.parse(asyncStorageRes)
+        });
+      });
+
+      await AsyncStorage.getItem('pdfPath').then(asyncStorageRes => {
         this.setState({
           pdfPath: asyncStorageRes
         });
 
       });
-
 
     } catch (error) {
       return "ERROR"
@@ -197,9 +216,9 @@ export class ContentView extends Component {
 
   static renderPdf(item) {
 
-    let source = {uri: item.url, cache: true};
+    let source = {uri: item.url+item.fileName, cache: true};
     if (item.type === 'int') {
-      source = {uri: "bundle-assets:"+item.url}
+      source = {uri: "bundle-assets:"+item.url+item.fileName}
     }
 
     return (
