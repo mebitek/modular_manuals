@@ -23,6 +23,8 @@ import SideMenu from "react-native-side-menu/index";
 import Icon from "react-native-vector-icons/Ionicons";
 import Pdf from 'react-native-pdf';
 import PropTypes from 'prop-types';
+import { AsyncStorage } from "react-native";
+
 
 export default class App extends Component {
 
@@ -37,7 +39,8 @@ export default class App extends Component {
       isOpen: false,
       selectedItem: '',
       loaded: false,
-      datasource: datasource
+      datasource: datasource,
+      preferences: false
     }
   }
 
@@ -56,17 +59,36 @@ export default class App extends Component {
       isOpen: false,
       loaded: true,
       selectedItem: item,
+      preferences: false
     });
   };
 
+  onPrefrencesClicked = () => {
+    this.setState({
+      isOpen: false,
+      preferences: true,
+      loaded: false,
+
+    })
+  };
+
+  onSavePrefs = () => {
+    this.setState({
+      isOpen: false,
+      preferences: false,
+      loaded: false,
+
+    })
+  };
+
   render() {
-    const menu = <Menu datasource={this.state.datasource} onItemSelected={this.onMenuItemSelected}/>;
+    const menu = <Menu datasource={this.state.datasource} onItemSelected={this.onMenuItemSelected} onPreferencesSelect={this.onPrefrencesClicked} savePrefs={this.onSavePrefs}/>;
 
     return (
         <SideMenu menu={menu} isOpen={this.state.isOpen}
                   onChange={isOpen => this.updateMenuState(isOpen)}>
           <ContentView loaded={this.state.loaded}
-                       selectedItem={this.state.selectedItem}/>
+                       selectedItem={this.state.selectedItem} preferences={this.state.preferences} onSavePrefs={this.onSavePrefs}/>
         </SideMenu>
     );
   }
@@ -74,11 +96,28 @@ export default class App extends Component {
 
 export class ContentView extends Component {
 
+  constructor(props) {
+    super(props);
+
+
+    this.state = {
+
+      pdfPath: ''
+    };
+
+    this.retrieveData();
+
+  }
+
   render() {
     return this.conditionalRender()
   }
 
   conditionalRender() {
+
+    if (this.props.preferences) {
+      return this.renderPreferences()
+    }
 
     if (this.props.loaded) {
       return ContentView.renderPdf(this.props.selectedItem);
@@ -86,6 +125,55 @@ export class ContentView extends Component {
       return this.renderDiscalimer();
     }
   }
+
+  renderPreferences() {
+
+    return (
+        <View style={styles.container}>
+          <Text style={styles.text}>Pdf File Path</Text>
+           <TextInput style={styles.textInputStyle} value={this.state.pdfPath} onChangeText={text => this.onChangePrefs(text)}/>
+          <Text style={styles.text} onPress={this.storeData}>OK</Text>
+        </View>
+    )
+
+  }
+
+  onChangePrefs = (text: string) =>  {
+    this.setState({pdfPath: text})
+
+  };
+
+  storeData = () => {
+
+    try {
+      AsyncStorage.setItem('pdfPath', this.state.pdfPath).then(() => {
+        this.setState({
+          pdfPath: this.state.pdfPath
+        });
+        this.props.onSavePrefs()
+      })
+    } catch (error) {
+      alert(error)
+    }
+
+
+  };
+
+   retrieveData = async () => {
+    try {
+      await AsyncStorage.getItem('pdfPath').then(asyncStorageRes => {
+
+        this.setState({
+          pdfPath: asyncStorageRes
+        });
+
+      });
+
+
+    } catch (error) {
+      return "ERROR"
+    }
+  };
 
   renderDiscalimer() {
 
@@ -175,6 +263,9 @@ export class Menu extends Component{
 
           />
         </ScrollView>
+          <View>
+            <Text onPress={() => this.props.onPreferencesSelect()} ><Icon name={"md-settings"} size={32}/></Text>
+          </View>
         </View>)
   }
 }
@@ -200,6 +291,7 @@ function shuffle(array) {
 
 Menu.propTypes = {
   onItemSelected: PropTypes.func.isRequired,
+  onPreferencesSelect: PropTypes.func.isRequired,
 };
 
 
