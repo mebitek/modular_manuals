@@ -26,9 +26,9 @@ import SideMenu from "react-native-side-menu/index";
 import Icon from "react-native-vector-icons/Ionicons";
 import Pdf from 'react-native-pdf';
 import PropTypes from 'prop-types';
-import {CheckBox} from 'react-native-elements';
-import PhotoUpload from 'react-native-photo-upload';
+import {CheckBox, ListItem} from 'react-native-elements';
 
+import PhotoUpload from 'react-native-photo-upload';
 
 export default class App extends Component {
 
@@ -47,6 +47,7 @@ export default class App extends Component {
       datasource: datasource,
       preferences: false,
       info: false,
+      edit: false,
       sortType: 1,
       defaultImage: defaultImage.default_image
     };
@@ -75,7 +76,8 @@ export default class App extends Component {
       loaded: true,
       selectedItem: item,
       preferences: false,
-      info: false
+      info: false,
+      edit: false
     });
   };
 
@@ -92,7 +94,18 @@ export default class App extends Component {
       isOpen: false,
       preferences: false,
       loaded: false,
-      info: true
+      info: true,
+      edit: false
+    })
+  };
+
+  onEditClicked = () => {
+    this.setState({
+      isOpen: false,
+      preferences: false,
+      loaded: false,
+      info: false,
+      edit: true
     })
   };
 
@@ -114,6 +127,7 @@ export default class App extends Component {
                        onItemSelected={this.onMenuItemSelected}
                        onPreferencesSelect={this.onPrefrencesClicked}
                        onInfoSelect={this.onInfoClicked}
+                       onEditSelect={this.onEditClicked}
                        savePrefs={this.onSavePrefs}
                        sortType={this.state.sortType}
     />;
@@ -121,12 +135,15 @@ export default class App extends Component {
     return (
         <SideMenu menu={menu} isOpen={this.state.isOpen}
                   onChange={isOpen => this.updateMenuState(isOpen)}>
-          <ContentView loaded={this.state.loaded}
-                       selectedItem={this.state.selectedItem}
-                       preferences={this.state.preferences}
-                       info={this.state.info}
-                       defaultImage={this.state.defaultImage}
-                       onSavePrefs={this.onSavePrefs}/>
+          <ContentView
+              datasource={this.state.datasource}
+              loaded={this.state.loaded}
+              selectedItem={this.state.selectedItem}
+              preferences={this.state.preferences}
+              info={this.state.info}
+              edit={this.state.edit}
+              defaultImage={this.state.defaultImage}
+              onSavePrefs={this.onSavePrefs}/>
         </SideMenu>
     );
   }
@@ -163,6 +180,10 @@ export class ContentView extends Component {
       return ContentView.renderInfo();
     }
 
+    if (this.props.edit) {
+      return this.renderEdit();
+    }
+
     if (this.props.loaded) {
       return this.renderPdf(this.props.selectedItem);
     } else {
@@ -170,11 +191,69 @@ export class ContentView extends Component {
     }
   }
 
+  renderHeader = () => {
+    return (<View style={{
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'space-between',
+      backgroundColor: '#FFF',
+      width: "100%",
+      padding: 10
+    }}>
+      <Text onPress={() => alert("save json")}><Icon
+          name={"md-save"} size={32}/></Text>
+      <Text onPress={() => alert("clear json")}><Icon
+          name={"md-trash"} size={32}/></Text>
+      <Text onPress={() => alert("restore defailt json")}><Icon
+          name={"md-funnel"} size={32}/></Text>
+      <Text onPress={() => alert("download json")}><Icon
+          name={"md-download"} size={32}/></Text>
+    </View>)
+  }
+
+  renderSeparator = () => {
+    return (
+        <View
+            style={{
+              height: 1,
+              width: "86%",
+              backgroundColor: "#CED0CE",
+              marginLeft: "14%"
+            }}
+        />
+    );
+  };
+
+  renderEdit() {
+    return (
+        <View style={styles.container}>
+          <Text style={styles.text}>EDIT MANUALS LIST</Text>
+          <ScrollView>
+            <FlatList
+                data={this.props.datasource}
+                renderItem={({item}) => (
+                    <ListItem
+                        title={item.key}
+                        subtitle={`${item.url}${item.fileName}`}
+                    />
+                )}
+                enableEmptySections={true}
+                style={{marginTop: 10}}
+                ListHeaderComponent={this.renderHeader}
+                ItemSeparatorComponent={this.renderSeparator}
+            />
+          </ScrollView>
+
+
+        </View>
+    )
+  }
+
   static renderInfo() {
     return (<View style={styles.container}>
 
       <Text style={styles.text}>Modular Manuals</Text>
-      <Text style={styles.text}>version 0.1</Text>
+      <Text style={styles.text}>version 0.2.3</Text>
       <Text/>
       <Text style={styles.text}>mebitek@gmail.com</Text>
       <Text style={styles.text}>http://www.mebitek.com</Text>
@@ -188,32 +267,40 @@ export class ContentView extends Component {
 
     return (
         <View style={styles.container}>
-          <CheckBox style={{width: width, color: "#000", backgroundColor: "#FFF"}} title={"Enable Load from FS"}
-                    checked={this.state.enablePdfPath}
-                    onPress={() => this.setState(
-                        {enablePdfPath: !this.state.enablePdfPath})}/>
+          <CheckBox
+              style={{width: width, color: "#000", backgroundColor: "#FFF"}}
+              title={"Enable Load from FS"}
+              checked={this.state.enablePdfPath}
+              onPress={() => this.setState(
+                  {enablePdfPath: !this.state.enablePdfPath})}/>
 
           {this.state.enablePdfPath &&
           <View>
             <Text style={styles.text}>Pdf File Path</Text>
-            <TextInput style={{width: width, color: "#000", backgroundColor: "#FFF"}}
-                       value={this.state.pdfPath}
-                       onChangeText={text => this.onChangePrefs(text)}/>
+            <TextInput
+                style={{width: width, color: "#000", backgroundColor: "#FFF"}}
+                value={this.state.pdfPath}
+                onChangeText={text => this.onChangePrefs(text)}/>
           </View>
           }
           <View>
-          <Text style={styles.text}>Sort Type</Text>
-          <Picker  style={{height: 50, width: width, backgroundColor: "#FFF", color: '#000'}}
+            <Text style={styles.text}>Sort Type</Text>
+            <Picker style={{
+              height: 50,
+              width: width,
+              backgroundColor: "#FFF",
+              color: '#000'
+            }}
 
-                   selectedValue={this.state.sortType}
-                  onValueChange={(itemValue, itemIndex) =>
+                    selectedValue={this.state.sortType}
+                    onValueChange={(itemValue, itemIndex) =>
                         this.setState({
                           sortType: itemValue
                         })
-                  }>
-            <Picker.Item label="Alphabetical" value="1"/>
-            <Picker.Item label="Shuffle" value="2"/>
-          </Picker>
+                    }>
+              <Picker.Item label="Alphabetical" value="1"/>
+              <Picker.Item label="Shuffle" value="2"/>
+            </Picker>
           </View>
           <Text style={styles.text} onPress={this.storeData}>OK</Text>
         </View>
@@ -283,6 +370,12 @@ export class ContentView extends Component {
       await AsyncStorage.getItem('pdfPath').then(asyncStorageRes => {
         this.setState({
           pdfPath: asyncStorageRes
+        });
+
+      });
+      await AsyncStorage.getItem('sortType').then(asyncStorageRes => {
+        this.setState({
+          sortType: asyncStorageRes
         });
 
       });
@@ -400,7 +493,8 @@ export class Menu extends Component {
           />
           <ScrollView scrollsToTop={false}>
             <FlatList
-                data={this.props.sortType === "1" ? this.state.datasource.sort((a, b) => a.key.localeCompare(b.key))
+                data={this.props.sortType === "1" ? this.state.datasource.sort(
+                    (a, b) => a.key.localeCompare(b.key))
                     : this.shuffle(this.state.datasource)}
                 renderItem={({item}) => (
                     <Text onPress={() => this.props.onItemSelected(item)}
@@ -418,7 +512,7 @@ export class Menu extends Component {
           }}>
             <Text onPress={() => this.props.onPreferencesSelect()}><Icon
                 name={"md-settings"} size={32}/></Text>
-            <Text onPress={() => null}><Icon
+            <Text onPress={() => {/*this.props.onEditSelect()*/}}><Icon
                 name={"md-create"} size={32}/></Text>
             <Text onPress={() => this.props.onInfoSelect()}><Icon
                 name={"md-information-circle"} size={32}/></Text>
@@ -451,12 +545,11 @@ export class Menu extends Component {
   }
 }
 
-
-
 Menu.propTypes = {
   onItemSelected: PropTypes.func.isRequired,
   onPreferencesSelect: PropTypes.func.isRequired,
   onInfoSelect: PropTypes.func.isRequired,
+  onEditSelect: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -464,6 +557,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#000',
+  },
+
+  containerTop: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
     backgroundColor: '#000',
   },
 
