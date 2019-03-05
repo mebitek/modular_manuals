@@ -49,8 +49,8 @@
   },
   {
     "key": "Make Noise Function Supplement",
-    "url": "//custom/M",
-    "fileName": "akenoise-Function-supplementV1.pdf",
+    "url": "//custom/",
+    "fileName": "Makenoise-Function-supplementV1.pdf",
     "type": "int"
   },
   {
@@ -132,7 +132,7 @@
     "type": "ext"
   },
   {
-    "key": "Make Noise Tempi Cheaat Sheet",
+    "key": "Make Noise Tempi Cheat Sheet",
     "url": "//custom/",
     "fileName": "TEMPI_Cheat_Sheet.pdf",
     "type": "int"
@@ -200,13 +200,13 @@
   {
     "key": "Moog Mother32 Quickstart",
     "url": "https://api.moogmusic.com/sites/default/files/2017-11/",
-    "fileName": "Mother%2032%20Quickstart.pdf",
+    "fileName": "Mother 32 Quickstart.pdf",
     "type": "ext"
   },
   {
     "key": "Moog Mother32 PatchBook",
     "url": "https://back.moogmusic.com/sites/default/files/2019-02/",
-    "fileName": "Electronicus%20Patch%20Book_0.pdf",
+    "fileName": "Electronicus Patch Book_0.pdf",
     "type": "ext"
   }
 ]
