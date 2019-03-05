@@ -29,6 +29,7 @@ import PropTypes from 'prop-types';
 import {CheckBox} from 'react-native-elements';
 import PhotoUpload from 'react-native-photo-upload';
 
+
 export default class App extends Component {
 
   constructor(props) {
@@ -37,6 +38,7 @@ export default class App extends Component {
     this.toggle = this.toggle.bind(this);
 
     const datasource = require("./manuals.json");
+    const defaultImage = require("./img/defaultImage.json");
 
     this.state = {
       isOpen: false,
@@ -45,7 +47,8 @@ export default class App extends Component {
       datasource: datasource,
       preferences: false,
       info: false,
-      sortType: 1
+      sortType: 1,
+      defaultImage: defaultImage.default_image
     };
 
     AsyncStorage.getItem('sortType').then(asyncStorageRes => {
@@ -122,6 +125,7 @@ export default class App extends Component {
                        selectedItem={this.state.selectedItem}
                        preferences={this.state.preferences}
                        info={this.state.info}
+                       defaultImage={this.state.defaultImage}
                        onSavePrefs={this.onSavePrefs}/>
         </SideMenu>
     );
@@ -137,7 +141,7 @@ export class ContentView extends Component {
 
       pdfPath: '',
       enablePdfPath: false,
-      image: 'https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg',
+      image: '',
       sortType: '1'
     };
 
@@ -259,7 +263,7 @@ export class ContentView extends Component {
   retrieveImage = async () => {
     await AsyncStorage.getItem('image').then(asyncStorageRes => {
       if (asyncStorageRes === null) {
-        asyncStorageRes = 'https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg'
+        asyncStorageRes = this.props.defaultImage
       }
       this.setState({
         image: asyncStorageRes
