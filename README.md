@@ -1,4 +1,5 @@
 # Modular Manuals
+## version 0.2.3
 
 An Android app that helps to consult Modular System Manuals
 
@@ -28,6 +29,7 @@ where:
 * native android code
 * search filter manual list
 * editable manuals.json list
+* sort list alphabetically or shuffled
 * manuals location can be internal (assets) or external (internet)
 * manuals are cached with no expiration
 * opensource
