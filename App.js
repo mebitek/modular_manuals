@@ -9,22 +9,23 @@
 
 import React, {Component} from 'react';
 import {
+  AsyncStorage,
   Dimensions,
   FlatList,
   Image,
   Platform,
   ScrollView,
   StyleSheet,
-  TextInput,
   Text,
+  TextInput,
   View
 } from 'react-native';
 import SideMenu from "react-native-side-menu/index";
 import Icon from "react-native-vector-icons/Ionicons";
 import Pdf from 'react-native-pdf';
 import PropTypes from 'prop-types';
-import { AsyncStorage } from "react-native";
-import { CheckBox } from 'react-native-elements'
+import {CheckBox} from 'react-native-elements';
+import PhotoUpload from 'react-native-photo-upload';
 
 
 export default class App extends Component {
@@ -83,13 +84,18 @@ export default class App extends Component {
   };
 
   render() {
-    const menu = <Menu datasource={this.state.datasource} onItemSelected={this.onMenuItemSelected} onPreferencesSelect={this.onPrefrencesClicked} savePrefs={this.onSavePrefs}/>;
+    const menu = <Menu datasource={this.state.datasource}
+                       onItemSelected={this.onMenuItemSelected}
+                       onPreferencesSelect={this.onPrefrencesClicked}
+                       savePrefs={this.onSavePrefs}/>;
 
     return (
         <SideMenu menu={menu} isOpen={this.state.isOpen}
                   onChange={isOpen => this.updateMenuState(isOpen)}>
           <ContentView loaded={this.state.loaded}
-                       selectedItem={this.state.selectedItem} preferences={this.state.preferences} onSavePrefs={this.onSavePrefs}/>
+                       selectedItem={this.state.selectedItem}
+                       preferences={this.state.preferences}
+                       onSavePrefs={this.onSavePrefs}/>
         </SideMenu>
     );
   }
@@ -100,14 +106,15 @@ export class ContentView extends Component {
   constructor(props) {
     super(props);
 
-
     this.state = {
 
       pdfPath: '',
-      enablePdfPath: false
+      enablePdfPath: false,
+      image: 'https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg'
     };
 
     this.retrieveData();
+    this.retrieveImage();
 
   }
 
@@ -116,13 +123,12 @@ export class ContentView extends Component {
   }
 
   conditionalRender() {
-
     if (this.props.preferences) {
       return this.renderPreferences()
     }
 
     if (this.props.loaded) {
-      return ContentView.renderPdf(this.props.selectedItem);
+      return this.renderPdf(this.props.selectedItem);
     } else {
       return this.renderDiscalimer();
     }
@@ -132,23 +138,26 @@ export class ContentView extends Component {
 
     return (
         <View style={styles.container}>
-          <CheckBox style={styles.text} title={"Enable Load from FS"} checked={this.state.enablePdfPath}  onPress={() => this.setState({ enablePdfPath: !this.state.enablePdfPath }) }/>
+          <CheckBox style={styles.text} title={"Enable Load from FS"}
+                    checked={this.state.enablePdfPath}
+                    onPress={() => this.setState(
+                        {enablePdfPath: !this.state.enablePdfPath})}/>
 
-          { this.state.enablePdfPath &&
-            <View>
-              <Text style={styles.text}>Pdf File Path</Text>
-              <TextInput style={styles.textInputStyle}
-                         value={this.state.pdfPath}
-                         onChangeText={text => this.onChangePrefs(text)}/>
-            </View>
+          {this.state.enablePdfPath &&
+          <View>
+            <Text style={styles.text}>Pdf File Path</Text>
+            <TextInput style={styles.textInputStyle}
+                       value={this.state.pdfPath}
+                       onChangeText={text => this.onChangePrefs(text)}/>
+          </View>
           }
-           <Text style={styles.text} onPress={this.storeData}>OK</Text>
+          <Text style={styles.text} onPress={this.storeData}>OK</Text>
         </View>
     )
 
   }
 
-  onChangePrefs = (text: string) =>  {
+  onChangePrefs = (text: string) => {
     this.setState({pdfPath: text})
 
   };
@@ -157,12 +166,13 @@ export class ContentView extends Component {
     try {
       AsyncStorage.setItem("pdfPath", this.state.pdfPath).then(() => {
         this.setState({
-          pdfPath: this.state.pdfPath
+          pdfPath: this.state.pdfPath.endsWith("/") ? this.state.pdfPath : this.state.pdfPath+"/"
         });
       });
-      AsyncStorage.setItem("enablePdfPath", JSON.stringify(this.state.enablePdfPath)).then(() => {
+      AsyncStorage.setItem("enablePdfPath",
+          JSON.stringify(this.state.enablePdfPath)).then(() => {
         this.setState({
-          pdfPath: this.state.enablePdfPath
+          enablePdfPath: this.state.enablePdfPath
         });
       });
       this.props.onSavePrefs()
@@ -172,8 +182,26 @@ export class ContentView extends Component {
     }
   };
 
+  storeImage = () => {
+    AsyncStorage.setItem("image", this.state.image).then(() => {
+      this.setState({
+        image: this.state.image
+      });
+    });
+  };
 
-   retrieveData = async () => {
+  retrieveImage = async () => {
+    await AsyncStorage.getItem('image').then(asyncStorageRes => {
+      if (asyncStorageRes===null) {
+        asyncStorageRes = 'https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg'
+      }
+      this.setState({
+        image: asyncStorageRes
+      });
+    });
+  };
+
+    retrieveData = async () => {
     try {
 
       await AsyncStorage.getItem('enablePdfPath').then(asyncStorageRes => {
@@ -203,10 +231,30 @@ export class ContentView extends Component {
         <View style={styles.container}>
           <Text style={styles.text}>Mebitek Modular System</Text>
           <Text style={styles.text}>Manual References</Text>
-          <Image style={{flex: 1, width: width, height: height} }
-                 source={require('./img/modulargrid_833923.png')}
-                 resizeMode="contain"
-          />
+
+          <PhotoUpload
+              onPhotoSelect={avatar => {
+                if (avatar) {
+                  this.setState({image: avatar});
+                  this.storeImage()
+                }
+              }}
+          >
+            <Image
+                style={{
+                  flex: 1,
+                  width: width,
+                  height: height,
+                }}
+                resizeMode='contain'
+                source={{
+                  uri: this.state.image.startsWith("http") ? this.state.image : "data:image/png;base64," + this.state.image
+                }}
+            />
+          </PhotoUpload>
+
+
+
           <Text style={styles.text}>
             <Icon name={"md-arrow-back"}/>Select a manual from the sidebar menu
           </Text>
@@ -214,12 +262,19 @@ export class ContentView extends Component {
     )
   }
 
-  static renderPdf(item) {
+  renderPdf(item) {
 
-    let source = {uri: item.url+item.fileName, cache: true};
-    if (item.type === 'int') {
-      source = {uri: "bundle-assets:"+item.url+item.fileName}
+    let source = '';
+    if (this.state.enablePdfPath) {
+      source = {uri: "file://"+this.state.pdfPath+item.fileName}
+    } else {
+      source = {uri: item.url + item.fileName, cache: true};
     }
+    if (item.type === 'int') {
+      source = {uri: "bundle-assets:" + item.url + item.fileName}
+    }
+
+    alert(source.uri);
 
     return (
         <View style={styles.container}>
@@ -232,7 +287,7 @@ export class ContentView extends Component {
   }
 }
 
-export class Menu extends Component{
+export class Menu extends Component {
 
   constructor(props) {
     super(props);
@@ -247,16 +302,16 @@ export class Menu extends Component{
   }
 
   searchFilterFunction = (text: string) => {
-      const newData = this.arrayholder.filter(function(item) {
-        const itemData = item.key.toUpperCase();
-        const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1;
-      });
+    const newData = this.arrayholder.filter(function (item) {
+      const itemData = item.key.toUpperCase();
+      const textData = text.toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
 
-      this.setState({
-        datasource: newData,
-        text: text
-      });
+    this.setState({
+      datasource: newData,
+      text: text
+    });
   };
 
   render() {
@@ -270,20 +325,21 @@ export class Menu extends Component{
               underlineColorAndroid="transparent"
               placeholder="Search Here"
           />
-        <ScrollView scrollsToTop={false} >
-          <FlatList
-              data={this.state.datasource}
-              renderItem={({item}) => (
-                  <Text onPress={() => this.props.onItemSelected(item)}
-                                            style={styles.item}>{item.key}</Text>
-              )}
-              enableEmptySections={true}
-              style={{ marginTop: 10 }}
+          <ScrollView scrollsToTop={false}>
+            <FlatList
+                data={this.state.datasource}
+                renderItem={({item}) => (
+                    <Text onPress={() => this.props.onItemSelected(item)}
+                          style={styles.item}>{item.key}</Text>
+                )}
+                enableEmptySections={true}
+                style={{marginTop: 10}}
 
-          />
-        </ScrollView>
+            />
+          </ScrollView>
           <View>
-            <Text onPress={() => this.props.onPreferencesSelect()} ><Icon name={"md-settings"} size={32}/></Text>
+            <Text onPress={() => this.props.onPreferencesSelect()}><Icon
+                name={"md-settings"} size={32}/></Text>
           </View>
         </View>)
   }
@@ -312,7 +368,6 @@ Menu.propTypes = {
   onItemSelected: PropTypes.func.isRequired,
   onPreferencesSelect: PropTypes.func.isRequired,
 };
-
 
 const styles = StyleSheet.create({
   container: {
