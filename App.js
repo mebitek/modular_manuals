@@ -18,7 +18,8 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  View
+  View,
+  Linking,
 } from 'react-native';
 import SideMenu from "react-native-side-menu/index";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -26,6 +27,7 @@ import Pdf from 'react-native-pdf';
 import PropTypes from 'prop-types';
 import {CheckBox} from 'react-native-elements';
 import PhotoUpload from 'react-native-photo-upload';
+import { WebView } from "react-native-webview";
 
 
 export default class App extends Component {
@@ -42,7 +44,8 @@ export default class App extends Component {
       selectedItem: '',
       loaded: false,
       datasource: datasource,
-      preferences: false
+      preferences: false,
+      info: false
     }
   }
 
@@ -61,7 +64,8 @@ export default class App extends Component {
       isOpen: false,
       loaded: true,
       selectedItem: item,
-      preferences: false
+      preferences: false,
+      info: false
     });
   };
 
@@ -70,7 +74,15 @@ export default class App extends Component {
       isOpen: false,
       preferences: true,
       loaded: false,
-
+      info: false
+    })
+  };
+  onInfoClicked = () => {
+    this.setState({
+      isOpen: false,
+      preferences: false,
+      loaded: false,
+      info: true
     })
   };
 
@@ -87,6 +99,7 @@ export default class App extends Component {
     const menu = <Menu datasource={this.state.datasource}
                        onItemSelected={this.onMenuItemSelected}
                        onPreferencesSelect={this.onPrefrencesClicked}
+                       onInfoSelect={this.onInfoClicked}
                        savePrefs={this.onSavePrefs}/>;
 
     return (
@@ -95,6 +108,7 @@ export default class App extends Component {
           <ContentView loaded={this.state.loaded}
                        selectedItem={this.state.selectedItem}
                        preferences={this.state.preferences}
+                       info={this.state.info}
                        onSavePrefs={this.onSavePrefs}/>
         </SideMenu>
     );
@@ -127,6 +141,10 @@ export class ContentView extends Component {
       return this.renderPreferences()
     }
 
+    if (this.props.info) {
+      return ContentView.renderInfo();
+    }
+
     if (this.props.loaded) {
       return this.renderPdf(this.props.selectedItem);
     } else {
@@ -134,7 +152,23 @@ export class ContentView extends Component {
     }
   }
 
-  renderPreferences() {
+  static renderInfo() {
+    return (<View style={styles.container}>
+
+      <Text style={styles.text}>Modular Manuals</Text>
+      <Text style={styles.text}>version 0.1</Text>
+      <Text/>
+      <Text style={styles.text}>mebitek@gmail.com</Text>
+      <Text style={styles.text}>http://www.mebitek.com</Text>
+      <Text/>
+
+    </View>)
+  }
+
+
+
+
+    renderPreferences() {
 
     return (
         <View style={styles.container}>
@@ -253,8 +287,6 @@ export class ContentView extends Component {
             />
           </PhotoUpload>
 
-
-
           <Text style={styles.text}>
             <Icon name={"md-arrow-back"}/>Select a manual from the sidebar menu
           </Text>
@@ -337,9 +369,13 @@ export class Menu extends Component {
 
             />
           </ScrollView>
-          <View>
+          <View style={{flexDirection:'row', flexWrap:'wrap', justifyContent: 'space-between'}}>
             <Text onPress={() => this.props.onPreferencesSelect()}><Icon
                 name={"md-settings"} size={32}/></Text>
+            <Text onPress={() => null}><Icon
+                name={"md-create"} size={32}/></Text>
+            <Text onPress={() => this.props.onInfoSelect()}><Icon
+                name={"md-information-circle"} size={32}/></Text>
           </View>
         </View>)
   }
@@ -367,6 +403,7 @@ function shuffle(array) {
 Menu.propTypes = {
   onItemSelected: PropTypes.func.isRequired,
   onPreferencesSelect: PropTypes.func.isRequired,
+  onInfoSelect: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({

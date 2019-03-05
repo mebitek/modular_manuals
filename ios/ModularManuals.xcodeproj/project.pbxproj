@@ -61,6 +61,7 @@
 		EFCD6AF56E52481EBBAACBD9 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB8106FB4E44A2F84B431AF /* libRNImagePicker.a */; };
 		A9641DD6F93F427AA7BD739F /* libRCTImageResizer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1BC0FA6D90B42E7B93205F9 /* libRCTImageResizer.a */; };
 		5E65049D6E9043D1B3AEAD56 /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E8BDAD884F04990B3DB87B1 /* libRNFS.a */; };
+		F769A85CAAED45CEBBCCE4DE /* libRNCWebView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A403A045E5144EEB8F04F4E /* libRNCWebView.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -396,6 +397,8 @@
 		E1BC0FA6D90B42E7B93205F9 /* libRCTImageResizer.a */ = {isa = PBXFileReference; name = "libRCTImageResizer.a"; path = "libRCTImageResizer.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		9ABEE0D655FA485A9B4BF616 /* RNFS.xcodeproj */ = {isa = PBXFileReference; name = "RNFS.xcodeproj"; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		3E8BDAD884F04990B3DB87B1 /* libRNFS.a */ = {isa = PBXFileReference; name = "libRNFS.a"; path = "libRNFS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		DFE7667DC118446880FE3523 /* RNCWebView.xcodeproj */ = {isa = PBXFileReference; name = "RNCWebView.xcodeproj"; path = "../node_modules/react-native-webview/ios/RNCWebView.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		7A403A045E5144EEB8F04F4E /* libRNCWebView.a */ = {isa = PBXFileReference; name = "libRNCWebView.a"; path = "libRNCWebView.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -430,6 +433,7 @@
 				EFCD6AF56E52481EBBAACBD9 /* libRNImagePicker.a in Frameworks */,
 				A9641DD6F93F427AA7BD739F /* libRCTImageResizer.a in Frameworks */,
 				5E65049D6E9043D1B3AEAD56 /* libRNFS.a in Frameworks */,
+				F769A85CAAED45CEBBCCE4DE /* libRNCWebView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,6 +630,7 @@
 				D12C3C5344364C968C1BBAAF /* RNImagePicker.xcodeproj */,
 				8C242EE428354252889B20CB /* RCTImageResizer.xcodeproj */,
 				9ABEE0D655FA485A9B4BF616 /* RNFS.xcodeproj */,
+				DFE7667DC118446880FE3523 /* RNCWebView.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1299,6 +1304,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1308,6 +1314,7 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-webview/ios",
 				);
 			};
 			name = Debug;
@@ -1336,6 +1343,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1345,6 +1353,7 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-webview/ios",
 				);
 			};
 			name = Release;
@@ -1373,6 +1382,7 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-webview/ios",
 				);
 			};
 			name = Debug;
@@ -1400,6 +1410,7 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-webview/ios",
 				);
 			};
 			name = Release;
@@ -1436,6 +1447,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1445,6 +1457,7 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-webview/ios",
 				);
 			};
 			name = Debug;
@@ -1481,6 +1494,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1490,6 +1504,7 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-webview/ios",
 				);
 			};
 			name = Release;
@@ -1525,6 +1540,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1534,6 +1550,7 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-webview/ios",
 				);
 			};
 			name = Debug;
@@ -1569,6 +1586,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1578,6 +1596,7 @@
 					"$(SRCROOT)/../node_modules/react-native-image-picker/ios",
 					"$(SRCROOT)/../node_modules/react-native-image-resizer/ios/RCTImageResizer",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-webview/ios",
 				);
 			};
 			name = Release;
