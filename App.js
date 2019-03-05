@@ -13,13 +13,14 @@ import {
   Dimensions,
   FlatList,
   Image,
+  Linking,
+  Picker,
   Platform,
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
-  View,
-  Linking,
+  View
 } from 'react-native';
 import SideMenu from "react-native-side-menu/index";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -27,8 +28,6 @@ import Pdf from 'react-native-pdf';
 import PropTypes from 'prop-types';
 import {CheckBox} from 'react-native-elements';
 import PhotoUpload from 'react-native-photo-upload';
-import { WebView } from "react-native-webview";
-
 
 export default class App extends Component {
 
@@ -45,8 +44,16 @@ export default class App extends Component {
       loaded: false,
       datasource: datasource,
       preferences: false,
-      info: false
-    }
+      info: false,
+      sortType: 1
+    };
+
+    AsyncStorage.getItem('sortType').then(asyncStorageRes => {
+      this.setState({
+        sortType: asyncStorageRes
+      });
+    });
+
   }
 
   toggle() {
@@ -91,8 +98,12 @@ export default class App extends Component {
       isOpen: false,
       preferences: false,
       loaded: false,
+    });
 
+    AsyncStorage.getItem('sortType').then(asyncStorageRes => {
+      this.setState({sortType: asyncStorageRes});
     })
+
   };
 
   render() {
@@ -100,7 +111,9 @@ export default class App extends Component {
                        onItemSelected={this.onMenuItemSelected}
                        onPreferencesSelect={this.onPrefrencesClicked}
                        onInfoSelect={this.onInfoClicked}
-                       savePrefs={this.onSavePrefs}/>;
+                       savePrefs={this.onSavePrefs}
+                       sortType={this.state.sortType}
+    />;
 
     return (
         <SideMenu menu={menu} isOpen={this.state.isOpen}
@@ -124,7 +137,8 @@ export class ContentView extends Component {
 
       pdfPath: '',
       enablePdfPath: false,
-      image: 'https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg'
+      image: 'https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg',
+      sortType: '1'
     };
 
     this.retrieveData();
@@ -165,14 +179,12 @@ export class ContentView extends Component {
     </View>)
   }
 
-
-
-
-    renderPreferences() {
+  renderPreferences() {
+    let width = Dimensions.get("window").width - 20;
 
     return (
         <View style={styles.container}>
-          <CheckBox style={styles.text} title={"Enable Load from FS"}
+          <CheckBox style={{width: width, color: "#000", backgroundColor: "#FFF"}} title={"Enable Load from FS"}
                     checked={this.state.enablePdfPath}
                     onPress={() => this.setState(
                         {enablePdfPath: !this.state.enablePdfPath})}/>
@@ -180,11 +192,25 @@ export class ContentView extends Component {
           {this.state.enablePdfPath &&
           <View>
             <Text style={styles.text}>Pdf File Path</Text>
-            <TextInput style={styles.textInputStyle}
+            <TextInput style={{width: width, color: "#000", backgroundColor: "#FFF"}}
                        value={this.state.pdfPath}
                        onChangeText={text => this.onChangePrefs(text)}/>
           </View>
           }
+          <View>
+          <Text style={styles.text}>Sort Type</Text>
+          <Picker  style={{height: 50, width: width, backgroundColor: "#FFF", color: '#000'}}
+
+                   selectedValue={this.state.sortType}
+                  onValueChange={(itemValue, itemIndex) =>
+                        this.setState({
+                          sortType: itemValue
+                        })
+                  }>
+            <Picker.Item label="Alphabetical" value="1"/>
+            <Picker.Item label="Shuffle" value="2"/>
+          </Picker>
+          </View>
           <Text style={styles.text} onPress={this.storeData}>OK</Text>
         </View>
     )
@@ -200,13 +226,19 @@ export class ContentView extends Component {
     try {
       AsyncStorage.setItem("pdfPath", this.state.pdfPath).then(() => {
         this.setState({
-          pdfPath: this.state.pdfPath.endsWith("/") ? this.state.pdfPath : this.state.pdfPath+"/"
+          pdfPath: this.state.pdfPath.endsWith("/") ? this.state.pdfPath
+              : this.state.pdfPath + "/"
         });
       });
       AsyncStorage.setItem("enablePdfPath",
           JSON.stringify(this.state.enablePdfPath)).then(() => {
         this.setState({
           enablePdfPath: this.state.enablePdfPath
+        });
+      });
+      AsyncStorage.setItem("sortType", this.state.sortType).then(() => {
+        this.setState({
+          sortType: this.state.sortType
         });
       });
       this.props.onSavePrefs()
@@ -226,7 +258,7 @@ export class ContentView extends Component {
 
   retrieveImage = async () => {
     await AsyncStorage.getItem('image').then(asyncStorageRes => {
-      if (asyncStorageRes===null) {
+      if (asyncStorageRes === null) {
         asyncStorageRes = 'https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg'
       }
       this.setState({
@@ -235,7 +267,7 @@ export class ContentView extends Component {
     });
   };
 
-    retrieveData = async () => {
+  retrieveData = async () => {
     try {
 
       await AsyncStorage.getItem('enablePdfPath').then(asyncStorageRes => {
@@ -282,7 +314,8 @@ export class ContentView extends Component {
                 }}
                 resizeMode='contain'
                 source={{
-                  uri: this.state.image.startsWith("http") ? this.state.image : "data:image/png;base64," + this.state.image
+                  uri: this.state.image.startsWith("http") ? this.state.image
+                      : "data:image/png;base64," + this.state.image
                 }}
             />
           </PhotoUpload>
@@ -298,15 +331,13 @@ export class ContentView extends Component {
 
     let source = '';
     if (this.state.enablePdfPath) {
-      source = {uri: "file://"+this.state.pdfPath+item.fileName}
+      source = {uri: "file://" + this.state.pdfPath + item.fileName}
     } else {
       source = {uri: item.url + item.fileName, cache: true};
     }
     if (item.type === 'int') {
       source = {uri: "bundle-assets:" + item.url + item.fileName}
     }
-
-    alert(source.uri);
 
     return (
         <View style={styles.container}>
@@ -324,13 +355,13 @@ export class Menu extends Component {
   constructor(props) {
     super(props);
 
-    this.arrayholder = shuffle(props.datasource);
+    this.arrayholder = props.datasource;
 
     this.state = {
       text: "",
-      datasource: this.arrayholder
+      datasource: this.arrayholder,
+      sortType: props.sortType
     };
-
   }
 
   searchFilterFunction = (text: string) => {
@@ -346,6 +377,12 @@ export class Menu extends Component {
     });
   };
 
+  componentDidUpdate() {
+    if (this.state.sortType !== this.props.sortType) {
+      this.setState({sortType: this.props.sortType})
+    }
+  }
+
   render() {
     return (
         <View style={styles.menu}>
@@ -359,7 +396,8 @@ export class Menu extends Component {
           />
           <ScrollView scrollsToTop={false}>
             <FlatList
-                data={this.state.datasource}
+                data={this.props.sortType === "1" ? this.state.datasource.sort((a, b) => a.key.localeCompare(b.key))
+                    : this.shuffle(this.state.datasource)}
                 renderItem={({item}) => (
                     <Text onPress={() => this.props.onItemSelected(item)}
                           style={styles.item}>{item.key}</Text>
@@ -369,7 +407,11 @@ export class Menu extends Component {
 
             />
           </ScrollView>
-          <View style={{flexDirection:'row', flexWrap:'wrap', justifyContent: 'space-between'}}>
+          <View style={{
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between'
+          }}>
             <Text onPress={() => this.props.onPreferencesSelect()}><Icon
                 name={"md-settings"} size={32}/></Text>
             <Text onPress={() => null}><Icon
@@ -379,26 +421,33 @@ export class Menu extends Component {
           </View>
         </View>)
   }
-}
 
-function shuffle(array) {
-  let currentIndex = array.length, temporaryValue, randomIndex;
+  shuffle(array) {
 
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
+    if (this.state.sortType === this.props.sortType) {
+      return array;
+    }
 
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
+    let currentIndex = array.length, temporaryValue, randomIndex;
 
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
   }
-
-  return array;
 }
+
+
 
 Menu.propTypes = {
   onItemSelected: PropTypes.func.isRequired,
@@ -413,6 +462,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#000',
   },
+
   text: {
     color: '#FFF'
   },
