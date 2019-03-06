@@ -20,7 +20,8 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  View
+  View,
+  BackHandler
 } from 'react-native';
 import SideMenu from "react-native-side-menu/index";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -29,6 +30,12 @@ import PropTypes from 'prop-types';
 import {CheckBox, ListItem} from 'react-native-elements';
 
 import PhotoUpload from 'react-native-photo-upload';
+
+import {
+  handleAndroidBackButton,
+  exitAlert,
+  removeAndroidBackButtonHandler
+} from './BackHandler';
 
 export default class App extends Component {
 
@@ -58,6 +65,13 @@ export default class App extends Component {
       });
     });
 
+  }
+
+  componentDidMount() {
+    handleAndroidBackButton(exitAlert);
+  }
+  componentWillUnmount() {
+    removeAndroidBackButtonHandler();
   }
 
   toggle() {
