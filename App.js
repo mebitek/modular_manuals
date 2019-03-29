@@ -455,7 +455,13 @@ export class ContentView extends Component {
           <Pdf
               key={item.key}
               source={source}
-              style={styles.pdf}/>
+              style={styles.pdf}
+              onError={(error)=>{
+                alert(error);
+              }}
+
+
+          />
         </View>
     )
   }
