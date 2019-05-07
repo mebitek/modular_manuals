@@ -267,7 +267,7 @@ export class ContentView extends Component {
     return (<View style={styles.container}>
 
       <Text style={styles.text}>Modular Manuals</Text>
-      <Text style={styles.text}>version 0.2.3</Text>
+      <Text style={styles.text}>version 0.2.4</Text>
       <Text/>
       <Text style={styles.text}>mebitek@gmail.com</Text>
       <Text style={styles.text}>http://www.mebitek.com</Text>

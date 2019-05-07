@@ -192,6 +192,12 @@
     "type": "ext"
   },
   {
+    "key": "Erica Synths Pico Drums",
+    "url": "https://www.ericasynths.lv/media/",
+    "fileName": "Pico_DRUMS1_Manual.pdf",
+    "type": "ext"
+  },
+  {
     "key": "2HP Avert",
     "url": "http://www.twohp.com/s/",
     "fileName": "2hp_AVert.pdf",
@@ -213,6 +219,24 @@
     "key": "Moog Mother32 PatchBook",
     "url": "https://back.moogmusic.com/sites/default/files/2019-02/",
     "fileName": "Electronicus Patch Book_0.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Arturia Beatstep Pro",
+    "url": "http://downloads.arturia.net/products/beatstep-pro/manual/",
+    "fileName": "beatstep-pro_Manual_2_0_EN.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Arturia Beatstep Pro Cheat Sheet",
+    "url": "https://www.arturia.com/images/products/beatstep-pro/",
+    "fileName": "BeatstepPro-CheatSheet.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Arturia Keystep",
+    "url": "http://downloads.arturia.net/products/keystep/manual/",
+    "fileName": "KeyStep_Manual_1_0_0_EN.pdf",
     "type": "ext"
   }
 ]
