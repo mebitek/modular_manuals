@@ -238,5 +238,83 @@
     "url": "http://downloads.arturia.net/products/keystep/manual/",
     "fileName": "KeyStep_Manual_1_0_0_EN.pdf",
     "type": "ext"
+  },
+  {
+    "key": "Antumbra SMOG",
+    "url": "https://mqtthiqs.github.io/parasites/images/",
+    "fileName": "clouds-cheat-sheet.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Noise Engineering Loquelic Iteritas",
+    "url": "https://www.noiseengineering.us/s/",
+    "fileName": "LI_manual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Noise Engineering Basimilus Iteritas Alter",
+    "url": "https://www.noiseengineering.us/s/",
+    "fileName": "BIA_manual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "2HP Hat",
+    "url": "http://www.twohp.com/s/",
+    "fileName": "2hp_Hat.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Noise Engineering Pons Asinorum",
+    "url": "https://www.noiseengineering.us/s/",
+    "fileName": "PA_manual-det6.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Noise Engineering Sinc Defeco",
+    "url": "https://www.noiseengineering.us/s/",
+    "fileName": "SD_manual-j4j7.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "2HP Verb",
+    "url": "http://www.twohp.com/s/",
+    "fileName": "Verb_Manual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Mutable Instruments Branches",
+    "url": "https://mutable-instruments.net/modules/branches/downloads/",
+    "fileName": "branches_quickstart.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "ALM Busy Circuits Pamela's NEW Workout",
+    "url": "https://busycircuits.com/docs/",
+    "fileName": "alm017-manual.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "SSF Ultra-Random Amalog",
+    "url": "http://www.steadystatefate.com/s/",
+    "fileName": "URAmanual_rev100.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Noise Engineering Clep Diaz",
+    "url": "https://www.noiseengineering.us/s/",
+    "fileName": "CD_manual-sm-y8hw.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Noise Engineering Numeric Repetitor",
+    "url": "https://www.noiseengineering.us/s/",
+    "fileName": "NR_manual-tysc.pdf",
+    "type": "ext"
+  },
+  {
+    "key": "Malekko Heavy Industries Voltage Block",
+    "url": "https://malekkoheavyindustry.com/content/uploads/2017/02/",
+    "fileName": "Malekko-Voltage-Block-ManualV1.5.pdf",
+    "type": "ext"
   }
 ]

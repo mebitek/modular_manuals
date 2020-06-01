@@ -1,5 +1,5 @@
 # Modular Manuals
-## version 0.2.3
+## version 0.2.5
 
 An Android app that helps to consult Modular System Manuals
 
@@ -45,7 +45,8 @@ where:
 
 released under **GNU GENERAL PUBLIC LICENSE v3** www.mebitek.com
 
-![Actual Setup](https://cdn.modulargrid.net/img/racks/modulargrid_833923.jpg)
+![Actual Setup](https://cdn.modulargrid.net/img/racks/modulargrid_1201627.jpg)
+![Actual Setup](https://cdn.modulargrid.net/img/racks/modulargrid_1222915.jpg)
 
 ### module list
 * Make Noise Erbe-Verb Illustrated (thx to http://www.vo1t.com)
@@ -83,6 +84,19 @@ released under **GNU GENERAL PUBLIC LICENSE v3** www.mebitek.com
 * Make Noise Shared System
 * Make Noise Telharmonic
 * Erica Synths Pico SEQS
+* Noise Engineering Loquelic Iteritas
+* Noise Engineering Basimilus Iteritas Alter
+* Noise Engineering Pons Asinorum
+* Noise Engineering Sinc Defeco
+* Noise Engineering Clep Diaz
+* Noise Engineering Numeric Repetitor
+* 2HP Hat
+* 2HP Verb
+* Mutable Instruments Branches
+* ALM Busy Circuits Pamela's NEW Workout
+* SSF Ultra-Random Amalog
+* Malekko Heavy Industries Voltage Block
+* Antumbra SMOG
 
 ### I do not own any manual rights
 ### all rights are owned by the modules manifacture
@@ -92,3 +106,9 @@ released under **GNU GENERAL PUBLIC LICENSE v3** www.mebitek.com
 ### https://www.ericasynths.lv/
 ### https://ornament-and-cri.me/
 ### https://www.moogmusic.com/
+### https://www.noiseengineering.us/
+### https://malekkoheavyindustry.com/
+### http://www.steadystatefate.com/
+### https://busycircuits.com/
+### https://mutable-instruments.net/
+### https://wmdevices.com/
